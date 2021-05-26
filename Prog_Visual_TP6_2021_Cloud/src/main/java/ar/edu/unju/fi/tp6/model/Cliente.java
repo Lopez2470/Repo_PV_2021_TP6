@@ -6,31 +6,66 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Period;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 @Component
+@Entity
+@Table(name = "CLIENTES")
 public class Cliente {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "cli_id")
+	private Long id;
+	
+	@Column(name = "cli_tipoDocumento", nullable = false, length = 10)
 	private String tipoDocumento;
+	
+	@Column(name = "cli_nroDocumento", nullable = false)
 	private int nroDocumento;
+	
+	@Column(name = "cli_apellidoNombre", nullable = false, length = 150)
 	private String apellidoNombre;
+	
+	@Column(name = "cli_email", nullable = false, length = 100)
 	private String email;
+	
+	@Column(name = "cli_password", nullable = false, length = 100)
 	private String password;
+	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "cli_fechaNacimiento", nullable = false)
 	private LocalDate fechaNacimiento;
+	
+	@Column(name = "cli_edad", nullable = false)
 	private int edad;
+	
+	@Column(name = "cli_codigoAreaTelefono", nullable = false)
 	private int codigoAreaTelefono;
+	
+	@Column(name = "cli_nroTelefono", nullable = false)
 	private int nroTelefono;
+	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "cli_fechaUltimaCompra", nullable = false)
 	private LocalDate fechaUltimaCompra;
 	
 	public Cliente() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Cliente(String tipoDocumento, int nroDocumento, String apellidoNombre, String email, String password,
-			LocalDate fechaNacimiento, int edad, int codigoAreaTelefono, int nroTelefono, LocalDate fechaUltimaCompra) {
+	public Cliente(long id, String tipoDocumento, int nroDocumento, String apellidoNombre, String email,
+			String password, LocalDate fechaNacimiento, int edad, int codigoAreaTelefono, int nroTelefono,
+			LocalDate fechaUltimaCompra) {
 		super();
+		this.id = id;
 		this.tipoDocumento = tipoDocumento;
 		this.nroDocumento = nroDocumento;
 		this.apellidoNombre = apellidoNombre;
@@ -41,6 +76,14 @@ public class Cliente {
 		this.codigoAreaTelefono = codigoAreaTelefono;
 		this.nroTelefono = nroTelefono;
 		this.fechaUltimaCompra = fechaUltimaCompra;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getTipoDocumento() {
@@ -179,22 +222,14 @@ public class Cliente {
         	tiempoProximoCumple = "Feliz Cumpleaños!!!";
         }
         return tiempoProximoCumple;
-        
-
 	}
 
 	@Override
 	public String toString() {
-		return "Cliente [tipoDocumento=" + tipoDocumento + ", nroDocumento=" + nroDocumento + ", apellidoNombre="
-				+ apellidoNombre + ", email=" + email + ", password=" + password + ", fechaNacimiento="
-				+ fechaNacimiento + ", edad=" + edad + ", codigoAreaTelefono=" + codigoAreaTelefono + ", nroTelefono="
-				+ nroTelefono + ", fechaUltimaCompra=" + fechaUltimaCompra + "]";
+		return "Cliente [id=" + id + ", tipoDocumento=" + tipoDocumento + ", nroDocumento=" + nroDocumento
+				+ ", apellidoNombre=" + apellidoNombre + ", email=" + email + ", password=" + password
+				+ ", fechaNacimiento=" + fechaNacimiento + ", edad=" + edad + ", codigoAreaTelefono="
+				+ codigoAreaTelefono + ", nroTelefono=" + nroTelefono + ", fechaUltimaCompra=" + fechaUltimaCompra
+				+ "]";
 	}
-	
-	
-	
-	
-	
-	
-
 }
